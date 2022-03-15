@@ -61,6 +61,7 @@ object Dependencies {
         val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
         val moshiAdapters = "com.squareup.moshi:moshi-adapters:${Versions.moshi}"
 
+        val archCore = "androidx.arch.core:core-testing:${Versions.archCore}"
         val truth = "com.google.truth:truth:${Versions.truth}"
         val truthExt = "androidx.test.ext:truth:${Versions.truthExt}"
         val mockkCore = "io.mockk:mockk:${Versions.mockk}"
@@ -101,6 +102,7 @@ fun Project.importTestDependencies() {
         androidTestImplementation(Dependencies.Deps.androidJunitKtx)
         androidTestImplementation(Dependencies.Deps.truth)
         androidTestImplementation(Dependencies.Deps.truthExt)
+        androidTestImplementation(Dependencies.Deps.archCore)
 
         androidTestImplementation(Dependencies.Deps.kotlinCoroutinesTest)
 

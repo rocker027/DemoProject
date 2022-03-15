@@ -1,4 +1,5 @@
 object Versions {
+    const val archCore = "2.1.0"
     const val truthExt = "1.4.0"
     const val androidLegacy = "1.0.0"
     const val navigation = "2.4.1"
