@@ -1,6 +1,5 @@
 plugins {
     id("com.android.application")
-//    id("com.android.library")
     commonPlugins.forEach { id(it) }
     id("dagger.hilt.android.plugin")
 }

@@ -38,6 +38,9 @@ object Dependencies {
         val materialDesign by lazy { "com.google.android.material:material:${Versions.material}" }
         val constraintLayout by lazy { "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}" }
 
+        val navigationFragmentKtx by lazy { "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}" }
+        val navigationUiKtx by lazy { "androidx.navigation:navigation-ui-ktx:${Versions.navigation}" }
+
         // lifecycle
         val lifecycleKtx by lazy { "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}" }
         val lifecycleViewModelKtx =
@@ -61,6 +64,8 @@ object Dependencies {
         val junit by lazy { "junit:junit:${Versions.jUnit}" }
         val androidJunit by lazy { "androidx.test.ext:junit:${Versions.androidJunit}" }
         val espresso by lazy { "androidx.test.espresso:espresso-core:${Versions.espresso}" }
+        val androidLegacy by lazy { "androidx.legacy:legacy-support-v4:${Versions.androidLegacy}" }
+
     }
 }
 
@@ -112,6 +117,9 @@ fun Project.importCommonDependencies() {
         implementation(Dependencies.Deps.constraintLayout)
         implementation(Dependencies.Deps.activityKtx)
         implementation(Dependencies.Deps.fragmentKtx)
+        implementation(Dependencies.Deps.navigationFragmentKtx)
+        implementation(Dependencies.Deps.navigationUiKtx)
+        implementation(Dependencies.Deps.androidLegacy)
         // lifecycle
         implementation(Dependencies.Deps.lifecycleKtx)
         implementation(Dependencies.Deps.lifecycleViewModelKtx)

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.coors.commoncore.domain
+package com.coors.demoproject.domain.base
 
 import androidx.lifecycle.MediatorLiveData
 
