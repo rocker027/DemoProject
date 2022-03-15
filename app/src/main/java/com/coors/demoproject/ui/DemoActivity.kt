@@ -27,9 +27,8 @@ class DemoActivity : AppCompatActivity() {
         }
 
         btnSorting.setOnClickListener {
-            // todo
+            viewModel.onClickSorting()
         }
-
     }
 
     private fun initViewBinding() {
