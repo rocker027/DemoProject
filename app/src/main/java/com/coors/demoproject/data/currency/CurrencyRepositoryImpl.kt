@@ -1,17 +1,12 @@
 package com.coors.demoproject.data.currency
 
-//import com.squareup.moshi.Moshi
-//import com.squareup.moshi.addAdapter
 import javax.inject.Inject
 
 class CurrencyRepositoryImpl @Inject constructor() : CurrencyRepository {
-    override fun fetchCurrencyList(): List<CurrencyInfo> {
-//        private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-//
-        return emptyList()
-    }
 
-    fun mockJsonString() = """
+    override fun fetchCurrencyListJson(): String = getJsonString()
+
+    private fun getJsonString() = """
              [
                   {
                     "id": "BTC",

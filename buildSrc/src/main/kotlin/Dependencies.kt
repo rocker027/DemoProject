@@ -21,10 +21,13 @@ object Dependencies {
         val androidTestCore by lazy { "androidx.test:core:${Versions.androidTest}" }
         val androidRules by lazy { "androidx.test:rules:${Versions.androidRules}" }
         val androidRunner by lazy { "androidx.test:runner:${Versions.androidRunner}" }
-        val androidJunitKtx by lazy { "androidx.test.ext:junit-ktx:${Versions.jUnit}" }
+        val androidJunitKtx by lazy { "androidx.test.ext:junit-ktx:${Versions.androidJunit}" }
+
         val hiltAndroid by lazy { "com.google.dagger:hilt-android:${Versions.hilt}" }
         val hiltViewModel by lazy { "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hiltViewModel}" }
-        val hiltCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.hilt}" }
+        val hiltAndroidCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.hilt}" }
+        val hiltCompiler by lazy { "androidx.hilt:hilt-compiler:${Versions.hiltViewModel}" }
+
         val kotlinCoroutinesCore by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}" }
         val kotlinCoroutinesAndroid by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}" }
         val kotlinCoroutinesTest by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinCoroutines}" }
@@ -59,6 +62,7 @@ object Dependencies {
         val moshiAdapters = "com.squareup.moshi:moshi-adapters:${Versions.moshi}"
 
         val truth = "com.google.truth:truth:${Versions.truth}"
+        val truthExt = "androidx.test.ext:truth:${Versions.truthExt}"
         val mockkCore = "io.mockk:mockk:${Versions.mockk}"
         val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
         val junit by lazy { "junit:junit:${Versions.jUnit}" }
@@ -96,6 +100,7 @@ fun Project.importTestDependencies() {
         androidTestImplementation(Dependencies.Deps.androidJunit)
         androidTestImplementation(Dependencies.Deps.androidJunitKtx)
         androidTestImplementation(Dependencies.Deps.truth)
+        androidTestImplementation(Dependencies.Deps.truthExt)
 
         androidTestImplementation(Dependencies.Deps.kotlinCoroutinesTest)
 
@@ -137,6 +142,7 @@ fun Project.importHiltDependencies() {
 
         implementation(Dependencies.Deps.hiltAndroid)
         implementation(Dependencies.Deps.hiltViewModel)
+        kapt(Dependencies.Deps.hiltAndroidCompiler)
         kapt(Dependencies.Deps.hiltCompiler)
     }
 }

@@ -1,4 +1,5 @@
 object Versions {
+    const val truthExt = "1.4.0"
     const val androidLegacy = "1.0.0"
     const val navigation = "2.4.1"
     const val activityKtx = "1.4.0"
@@ -25,5 +26,5 @@ object Versions {
     const val androidTest = "1.4.0"
     const val androidRunner = "1.4.0"
     const val androidRules = "1.4.0"
-    const val truth = "1.4.0"
+    const val truth = "1.1.3"
 }
