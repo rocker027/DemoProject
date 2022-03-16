@@ -60,6 +60,6 @@ importTestDependencies()
 importThirdPartyDependencies()
 
 dependencies {
-
+    implementation(project(":common"))
 
 }
