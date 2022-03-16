@@ -24,9 +24,7 @@ object Dependencies {
         val androidJunitKtx by lazy { "androidx.test.ext:junit-ktx:${Versions.androidJunit}" }
 
         val hiltAndroid by lazy { "com.google.dagger:hilt-android:${Versions.hilt}" }
-        val hiltViewModel by lazy { "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hiltViewModel}" }
         val hiltAndroidCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.hilt}" }
-        val hiltCompiler by lazy { "androidx.hilt:hilt-compiler:${Versions.hiltViewModel}" }
 
         val kotlinCoroutinesCore by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}" }
         val kotlinCoroutinesAndroid by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}" }
@@ -143,9 +141,7 @@ fun Project.importHiltDependencies() {
         val kapt by configurations
 
         implementation(Dependencies.Deps.hiltAndroid)
-        implementation(Dependencies.Deps.hiltViewModel)
         kapt(Dependencies.Deps.hiltAndroidCompiler)
-        kapt(Dependencies.Deps.hiltCompiler)
     }
 }
 
@@ -163,7 +159,6 @@ fun Project.importThirdPartyDependencies() {
 fun Project.importKotlinCoroutines() {
     dependencies {
         val implementation by configurations
-        val kapt by configurations
 
         implementation(Dependencies.Deps.kotlinCoroutinesCore)
         implementation(Dependencies.Deps.kotlinCoroutinesAndroid)

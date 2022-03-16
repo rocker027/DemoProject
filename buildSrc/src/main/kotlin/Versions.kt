@@ -23,7 +23,7 @@ object Versions {
     const val jUnit = "4.12"
     const val espresso = "3.4.0"
     const val androidxCoreKtx = "1.7.0"
-    const val mockk = "1.12.3"
+    const val mockk = "1.11.0"
     const val androidTest = "1.4.0"
     const val androidRunner = "1.4.0"
     const val androidRules = "1.4.0"
