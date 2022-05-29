@@ -1,4 +1,5 @@
 object Versions {
+    const val composeUi = "1.1.1"
     const val archCore = "2.1.0"
     const val truthExt = "1.4.0"
     const val androidLegacy = "1.0.0"
