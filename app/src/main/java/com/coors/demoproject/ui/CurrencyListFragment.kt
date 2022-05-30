@@ -6,6 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -44,13 +54,40 @@ class CurrencyListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        fragmentViewBinding = FragmentCurrencyListBinding.inflate(inflater, container, false)
-        return fragmentViewBinding.root
+        return ComposeView(requireContext()).apply {
+            setContent {
+                Text(text = "test on ")
+            }
+        }
+    }
+
+
+    @Preview(showBackground = true)
+    @Composable
+    fun Screen() {
+        MaterialTheme() {
+            Column {
+                Row {
+                    Text(text = "text2222222")
+                    Text(
+                        text= "test on text" , color = Color.White
+                    )
+                }
+
+                Row {
+                    Text(text = "text2222222")
+                    Text(
+                        text= "test on text" , color = Color.White
+                    )
+                }
+            }
+        }
     }
 
     @OptIn(InternalCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (!::fragmentViewBinding.isInitialized) return
         fragmentViewBinding.initViews()
         subscribeFlow()
     }
