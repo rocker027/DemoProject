@@ -48,14 +48,13 @@ class CurrencyListFragment : Fragment() {
         return fragmentViewBinding.root
     }
 
-    @InternalCoroutinesApi
+    @OptIn(InternalCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentViewBinding.initViews()
         subscribeFlow()
     }
 
-    @InternalCoroutinesApi
     private fun subscribeFlow() {
         collectFetchCurrencyList()
         collectErrorMessage()

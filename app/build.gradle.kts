@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     commonPlugins.forEach { id(it) }
     id("dagger.hilt.android.plugin")
+    id("com.google.devtools.ksp").version("1.6.10-1.0.4")
 }
 
 android {
@@ -46,10 +47,15 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 
     packagingOptions {
         exclude("META-INF/*")
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.composeUi
     }
 }
 

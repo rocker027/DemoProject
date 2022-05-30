@@ -17,6 +17,7 @@ object Dependencies {
      * To define dependencies
      */
     object Deps {
+        val composeUnitTest by lazy { "androidx.compose.ui:ui-test-junit4:${Versions.composeUi}" }
         val composeUiLiveData by lazy { "androidx.compose.runtime:runtime-livedata:${Versions.composeUi}" }
         val composeMaterialDesignIconExtended by lazy { "androidx.compose.material:material-icons-extended:${Versions.composeUi}" }
         val composeMaterialDesignIcon by lazy { "androidx.compose.material:material-icons-core:${Versions.composeUi}" }
@@ -118,7 +119,7 @@ fun Project.importTestDependencies() {
         androidTestImplementation(Dependencies.Deps.espresso)
 
         // compose UI Tests
-        androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.1.1")
+        androidTestImplementation(Dependencies.Deps.composeUnitTest)
     }
 }
 
@@ -149,6 +150,12 @@ fun Project.importCommonDependencies() {
         implementation(Dependencies.Deps.composeUiTooling)
         // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
         implementation(Dependencies.Deps.composeFoundation)
+        // Integration with activities
+        implementation("androidx.activity:activity-compose:${Versions.activityCompose}")
+        // Animations
+        implementation("androidx.compose.animation:animation:${Versions.composeUi}")
+        // Integration with ViewModels
+        implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.viewModelCompose}")
         // Material Design
         implementation(Dependencies.Deps.composeMaterialDesign)
         // Material design icons
@@ -174,10 +181,11 @@ fun Project.importHiltDependencies() {
 fun Project.importThirdPartyDependencies() {
     dependencies {
         val implementation by configurations
+        val ksp by configurations
 
         implementation(Dependencies.Deps.timber)
         implementation(Dependencies.Deps.moshiKotlin)
-        implementation(Dependencies.Deps.moshiCodegen)
+        ksp(Dependencies.Deps.moshiCodegen)
         implementation(Dependencies.Deps.moshiAdapters)
     }
 }
