@@ -1,4 +1,4 @@
-package com.coors.demoproject.ui
+package com.coors.demoproject.ui.cro
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

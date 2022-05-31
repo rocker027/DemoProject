@@ -1,4 +1,4 @@
-package com.coors.demoproject.ui
+package com.coors.demoproject.ui.cro
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
-class DemoActivityViewModel @Inject constructor(
+class CurrencyListViewModel @Inject constructor(
     private val fetchCurrencyListUseCase: FetchCurrencyListUseCase,
     private val sortingCurrencyListUseCase: SortingCurrencyListUseCase
 ) : ViewModel() {

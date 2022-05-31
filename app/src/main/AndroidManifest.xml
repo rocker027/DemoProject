@@ -20,12 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.DemoActivity"
-            android:exported="false"
-            android:screenOrientation="portrait">
-
-        </activity>
     </application>
 
 </manifest>

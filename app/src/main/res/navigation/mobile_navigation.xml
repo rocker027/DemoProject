@@ -6,7 +6,7 @@
     app:startDestination="@id/currencyListFragment">
     <fragment
         android:id="@+id/currencyListFragment"
-        android:name="com.coors.demoproject.ui.CurrencyListFragment"
+        android:name="com.coors.demoproject.ui.cro.CurrencyListFragment"
         android:label="fragment_currency_list"
         tools:layout="@layout/fragment_currency_list" />
 </navigation>
