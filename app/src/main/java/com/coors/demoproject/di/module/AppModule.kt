@@ -1,6 +1,8 @@
 package com.coors.demoproject.di.module
 
 import com.coors.demoproject.data.currency.*
+import com.coors.demoproject.data.home.HomeRepository
+import com.coors.demoproject.data.home.HomeRepositoryImpl
 import com.coors.demoproject.di.qualifier.CurrencyMapperQualifier
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -23,6 +25,10 @@ class AppModule {
     @Provides
     @Singleton
     fun provideCurrencyRepository(): CurrencyRepository = CurrencyRepositoryImpl()
+
+    @Provides
+    @Singleton
+    fun provideHomeRepository(): HomeRepository = HomeRepositoryImpl()
 
     @Provides
     @CurrencyMapperQualifier
