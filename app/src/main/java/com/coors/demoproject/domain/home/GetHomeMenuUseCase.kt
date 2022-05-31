@@ -6,16 +6,18 @@ import com.coors.demoproject.data.home.HomeMenu
 import com.coors.demoproject.data.home.HomeRepository
 import com.coors.demoproject.di.qualifier.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class GetHomeMenuUseCase @Inject constructor(
     private val homeRepository: HomeRepository,
     @IoDispatcher coroutineDispatcher: CoroutineDispatcher
 ) : FlowUseCase<Unit, List<HomeMenu>>(coroutineDispatcher) {
 
     override fun execute(parameters: Unit): Flow<Result<List<HomeMenu>>> = flow {
-        Result.Success(homeRepository.getMenu())
+        emit(Result.Success(homeRepository.getMenu()))
     }
 }
