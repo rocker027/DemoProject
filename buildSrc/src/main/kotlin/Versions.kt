@@ -1,4 +1,6 @@
 object Versions {
+    const val hiltNavigationCompose = "1.0.0"
+    const val coliCompose = "2.1.0"
     const val viewModelCompose = "2.4.1"
     const val activityCompose = "1.4.0"
     const val composeUi: String = "1.1.1"

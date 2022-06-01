@@ -19,7 +19,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val homeRepository: HomeRepository,
     private val getHomeMenuUseCase: GetHomeMenuUseCase,
-    @Assisted private val savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     @OptIn(ExperimentalCoroutinesApi::class)

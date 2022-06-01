@@ -17,6 +17,8 @@ object Dependencies {
      * To define dependencies
      */
     object Deps {
+        val hiltNavigationCompose by lazy { "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationCompose}" }
+        val coliCompose by lazy { "io.coil-kt:coil-compose:${Versions.coliCompose}" }
         val composeUnitTest by lazy { "androidx.compose.ui:ui-test-junit4:${Versions.composeUi}" }
         val composeUiLiveData by lazy { "androidx.compose.runtime:runtime-livedata:${Versions.composeUi}" }
         val composeMaterialDesignIconExtended by lazy { "androidx.compose.material:material-icons-extended:${Versions.composeUi}" }
@@ -164,7 +166,8 @@ fun Project.importCommonDependencies() {
         // Integration with observables
         implementation(Dependencies.Deps.composeUiLiveData)
 //        implementation("androidx.compose.runtime:runtime-rxjava2:${Versions.composeUi}")
-
+        implementation(Dependencies.Deps.coliCompose)
+        implementation(Dependencies.Deps.hiltNavigationCompose)
     }
 }
 
