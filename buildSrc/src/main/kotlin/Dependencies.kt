@@ -17,6 +17,13 @@ object Dependencies {
      * To define dependencies
      */
     object Deps {
+        val androidJunit5Runner by lazy { "de.mannodermaus.junit5:android-test-runner:${Versions.androidJunit5}" }
+        val androidJunit5Core by lazy { "de.mannodermaus.junit5:android-test-core:${Versions.androidJunit5}" }
+        val junit5Engine by lazy { "org.junit.jupiter:junit-jupiter-engine:${Versions.junit5}" }
+        val junit5Jupiter by lazy { "org.junit.jupiter:junit-jupiter-api:${Versions.junit5}" }
+        val koTestProperty by lazy { "io.kotest:kotest-property:${Versions.kotest}" }
+        val koTestAssertions by lazy { "io.kotest:kotest-assertions-core:${Versions.kotest}" }
+        val koTestRunner by lazy { "io.kotest:kotest-runner-junit5:${Versions.kotest}" }
         val hiltNavigationCompose by lazy { "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationCompose}" }
         val coliCompose by lazy { "io.coil-kt:coil-compose:${Versions.coliCompose}" }
         val composeUnitTest by lazy { "androidx.compose.ui:ui-test-junit4:${Versions.composeUi}" }
@@ -92,6 +99,8 @@ fun Project.importTestDependencies() {
     dependencies {
         val testImplementation by configurations
         val androidTestImplementation by configurations
+        val testRuntimeOnly by configurations
+        val androidTestRuntimeOnly by configurations
 
         /**
          * @link https://developer.android.com/training/testing/instrumented-tests/androidx-test-libraries/test-setup
@@ -122,6 +131,17 @@ fun Project.importTestDependencies() {
 
         // compose UI Tests
         androidTestImplementation(Dependencies.Deps.composeUnitTest)
+
+        // koTest
+        androidTestImplementation(Dependencies.Deps.koTestRunner)
+        androidTestImplementation(Dependencies.Deps.koTestAssertions)
+        androidTestImplementation(Dependencies.Deps.koTestProperty)
+
+        // junit 5
+        testImplementation(Dependencies.Deps.junit5Jupiter)
+        testRuntimeOnly(Dependencies.Deps.junit5Engine)
+        androidTestImplementation(Dependencies.Deps.androidJunit5Core)
+        androidTestRuntimeOnly(Dependencies.Deps.androidJunit5Runner)
     }
 }
 

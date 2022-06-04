@@ -2,23 +2,22 @@ package com.coors.demoproject
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.should
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.startWith
 
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.junit.Assert.*
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-@RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
-    @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.coors.demoproject", appContext.packageName)
+
+class MyTests : StringSpec({
+    "length should return size of string" {
+        "hello".length shouldBe 5
     }
-}
+    "startsWith should test for a prefix" {
+        "world" should startWith("wor")
+    }
+})

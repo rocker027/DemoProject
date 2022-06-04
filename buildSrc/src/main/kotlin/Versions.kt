@@ -1,4 +1,7 @@
 object Versions {
+    const val androidJunit5 = "1.3.0"
+    const val junit5 = "5.8.2"
+    const val kotest = "5.3.0"
     const val hiltNavigationCompose = "1.0.0"
     const val coliCompose = "2.1.0"
     const val viewModelCompose = "2.4.1"

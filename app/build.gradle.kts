@@ -3,6 +3,7 @@ plugins {
     commonPlugins.forEach { id(it) }
     id("dagger.hilt.android.plugin")
     id("com.google.devtools.ksp").version("1.6.10-1.0.4")
+    id("de.mannodermaus.android-junit5")
 }
 
 android {
@@ -16,7 +17,10 @@ android {
         versionCode = ConfigExtensions.versionCode
         versionName = ConfigExtensions.versionName
 
+        // 1) Make sure to use the AndroidJUnitRunner, or a subclass of it. This requires a dependency on androidx.test:runner, too!
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // 2) Connect JUnit 5 to the runner
+        testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
 
     buildTypes {
@@ -57,6 +61,10 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.composeUi
     }
+
+    tasks.withType<Test>().configureEach {
+        useJUnitPlatform()
+    }
 }
 
 importCommonDependencies()
@@ -67,5 +75,4 @@ importThirdPartyDependencies()
 
 dependencies {
     implementation(project(":common"))
-
 }
