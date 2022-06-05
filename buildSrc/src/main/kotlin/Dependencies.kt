@@ -1,5 +1,6 @@
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.exclude
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.provideDelegate
 
@@ -80,6 +81,7 @@ object Dependencies {
         val truth = "com.google.truth:truth:${Versions.truth}"
         val truthExt = "androidx.test.ext:truth:${Versions.truthExt}"
         val mockkCore = "io.mockk:mockk:${Versions.mockk}"
+        val mockkJvm by lazy { "io.mockk:mockk-agent-jvm:${Versions.mockk}" }
         val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
         val junit by lazy { "junit:junit:${Versions.jUnit}" }
         val androidJunit by lazy { "androidx.test.ext:junit:${Versions.androidJunit}" }
@@ -124,7 +126,8 @@ fun Project.importTestDependencies() {
         androidTestImplementation(Dependencies.Deps.kotlinCoroutinesTest)
 
         testImplementation(Dependencies.Deps.junit)
-        testImplementation(Dependencies.Deps.mockkCore)
+//        testImplementation(Dependencies.Deps.mockkCore)
+        androidTestImplementation(Dependencies.Deps.mockkJvm)
         androidTestImplementation(Dependencies.Deps.mockkAndroid)
         androidTestImplementation(Dependencies.Deps.androidJunit)
         androidTestImplementation(Dependencies.Deps.espresso)
@@ -142,6 +145,15 @@ fun Project.importTestDependencies() {
         testRuntimeOnly(Dependencies.Deps.junit5Engine)
         androidTestImplementation(Dependencies.Deps.androidJunit5Core)
         androidTestRuntimeOnly(Dependencies.Deps.androidJunit5Runner)
+    }
+
+    // fix mockk 1.12.4 issue
+    allprojects {
+        afterEvaluate {
+            configurations.findByName("androidTestImplementation")?.run {
+                exclude(group = "io.mockk", module = "mockk-agent-jvm")
+            }
+        }
     }
 }
 
