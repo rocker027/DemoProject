@@ -27,8 +27,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
-class FetchCurrencyListUseCaseTest {
+class FetchCurrencyListUseCaseTest : AnnotationSpec() {
 
     // Executes tasks in the Architecture Components in the same thread
     @get:Rule

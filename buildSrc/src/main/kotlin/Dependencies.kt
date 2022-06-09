@@ -126,7 +126,8 @@ fun Project.importTestDependencies() {
         androidTestImplementation(Dependencies.Deps.kotlinCoroutinesTest)
 
         testImplementation(Dependencies.Deps.junit)
-//        testImplementation(Dependencies.Deps.mockkCore)
+        testImplementation(Dependencies.Deps.mockkCore)
+        testImplementation(Dependencies.Deps.mockkJvm)
         androidTestImplementation(Dependencies.Deps.mockkJvm)
         androidTestImplementation(Dependencies.Deps.mockkAndroid)
         androidTestImplementation(Dependencies.Deps.androidJunit)
@@ -136,6 +137,9 @@ fun Project.importTestDependencies() {
         androidTestImplementation(Dependencies.Deps.composeUnitTest)
 
         // koTest
+        testImplementation(Dependencies.Deps.koTestRunner)
+        testImplementation(Dependencies.Deps.koTestAssertions)
+        testImplementation(Dependencies.Deps.koTestProperty)
         androidTestImplementation(Dependencies.Deps.koTestRunner)
         androidTestImplementation(Dependencies.Deps.koTestAssertions)
         androidTestImplementation(Dependencies.Deps.koTestProperty)
