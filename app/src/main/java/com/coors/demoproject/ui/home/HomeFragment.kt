@@ -31,7 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.findNavController
 import com.coors.demoproject.R
 import com.coors.demoproject.compose.BasicsTheme
-import com.coors.demoproject.data.home.HomeMenu
+import com.coors.demoproject.data.home.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -64,16 +64,7 @@ class HomeFragment : Fragment() {
             mutableStateOf(false)
         }
 
-
         val menus: List<HomeMenu> by viewModel.getMenus().collectAsState(initial = emptyList())
-
-//        val menus by viewModel.menus.coll
-
-//        val menus = listOf(
-//            HomeMenu(name = "Demo compose ver.", description = "test compose"),
-//            HomeMenu(name = "CRO demo kotlin ver.", description = "cro demo test with kotlin"),
-//            HomeMenu(name = "CRO demo compose ver.", description = "cro demo test with compose")
-//        )
 
         LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
             items(menus) { menu ->
@@ -100,12 +91,19 @@ class HomeFragment : Fragment() {
             backgroundColor = MaterialTheme.colors.primary,
             modifier = Modifier
                 .padding(vertical = 4.dp, horizontal = 8.dp)
-                .clickable {
-                    navController.navigate(R.id.action_homeFragment_to_currencyListFragment)
-                },
+                .clickable { handleNaviTo(homeMenu) },
         ) {
             MenuItemViewLayout(homeMenu = homeMenu)
         }
+    }
+
+    private fun handleNaviTo(homeMenu: HomeMenu) = when(homeMenu){
+        is CroDemoCompose -> R.id.action_homeFragment_to_currencyListFragment
+        is CroDemoKotlin -> R.id.action_homeFragment_to_currencyListFragment
+        is Home -> R.id.action_homeFragment_to_currencyListFragment
+        is TestCompose -> R.id.action_homeFragment_to_currencyListFragment
+    }.run {
+        navController.navigate(this)
     }
 
     @Composable
@@ -178,7 +176,7 @@ class HomeFragment : Fragment() {
     fun DefaultPreview() {
         BasicsTheme {
             GetMenuItems(
-                homeMenu = HomeMenu(
+                homeMenu = TestCompose(
                     name = "這是測試",
                     description = "要不要架個server或找個來一起玩啊,要不要架個server或找個來一起玩啊"
                 )
