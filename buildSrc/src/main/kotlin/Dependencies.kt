@@ -35,6 +35,8 @@ object Dependencies {
         val composeFoundation by lazy { "androidx.compose.foundation:foundation:${Versions.composeUi}" }
         val composeUiTooling by lazy { "androidx.compose.ui:ui-tooling:${Versions.composeUi}" }
         val composeUi by lazy { "androidx.compose.ui:ui:${Versions.composeUi}" }
+        val composeConstraintLayout by lazy { "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraintLayout}" }
+
         val androidTestCoreKtx by lazy { "androidx.test:core-ktx:${Versions.androidTest}" }
         val androidTestCore by lazy { "androidx.test:core:${Versions.androidTest}" }
         val androidRules by lazy { "androidx.test:rules:${Versions.androidRules}" }
@@ -184,6 +186,7 @@ fun Project.importCommonDependencies() {
 
         // compose
         implementation(Dependencies.Deps.composeUi)
+        implementation(Dependencies.Deps.composeConstraintLayout)
         // Tooling support (Previews, etc.)
         implementation(Dependencies.Deps.composeUiTooling)
         // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
@@ -204,6 +207,7 @@ fun Project.importCommonDependencies() {
 //        implementation("androidx.compose.runtime:runtime-rxjava2:${Versions.composeUi}")
         implementation(Dependencies.Deps.coliCompose)
         implementation(Dependencies.Deps.hiltNavigationCompose)
+        implementation(Dependencies.Deps.composeConstraintLayout)
     }
 }
 

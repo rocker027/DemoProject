@@ -28,6 +28,7 @@ object Versions {
     const val appCompat = "1.4.1"
     const val material = "1.5.0"
     const val constraintLayout = "1.1.3"
+    const val composeConstraintLayout = "1.0.1"
     const val jUnit = "4.12"
     const val espresso = "3.4.0"
     const val androidxCoreKtx = "1.7.0"
