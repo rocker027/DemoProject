@@ -1,3 +1,6 @@
 [submodule "CommonCore"]
 	path = CommonCore
 	url = https://github.com/rocker027/CommonCore.git
+[submodule "pluginVersion"]
+	path = pluginVersion
+	url = git@github.com:rocker027/pluginVersion.git
