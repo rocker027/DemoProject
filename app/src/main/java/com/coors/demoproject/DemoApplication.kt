@@ -2,16 +2,14 @@ package com.coors.demoproject
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
-import timber.log.Timber
-import timber.log.Timber.DebugTree
+import logcat.AndroidLogcatLogger
+import logcat.LogPriority
 
 
 @HiltAndroidApp
 class DemoApplication : Application(){
     override fun onCreate() {
         super.onCreate()
-        if (BuildConfig.DEBUG) {
-            Timber.plant(DebugTree())
-        }
+        AndroidLogcatLogger.installOnDebuggableApp(this, minPriority = LogPriority.VERBOSE)
     }
 }

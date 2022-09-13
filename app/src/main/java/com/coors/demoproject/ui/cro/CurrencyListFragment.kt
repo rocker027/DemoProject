@@ -17,9 +17,10 @@ import com.coors.demoproject.data.currency.CurrencyInfo
 import com.coors.demoproject.databinding.FragmentCurrencyListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import timber.log.Timber
+import logcat.asLog
+import logcat.logcat
 
 @AndroidEntryPoint
 class CurrencyListFragment : Fragment() {
@@ -64,8 +65,13 @@ class CurrencyListFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.currencyListStateFlow
                 .flowWithLifecycle(lifecycle)
+                .catch { e ->
+
+                    logcat { "RRR Error ${e.asLog()}" }
+                }
                 .collect {
-                    Timber.d("RRR show $it")
+                    throw Exception("RRR Error")
+                    logcat { "RRR show $it" }
                     currencyListAdapter.submitList(it)
                 }
         }
