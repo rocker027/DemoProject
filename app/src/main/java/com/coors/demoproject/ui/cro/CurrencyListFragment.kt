@@ -18,6 +18,7 @@ import com.coors.demoproject.databinding.FragmentCurrencyListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import logcat.asLog
 import logcat.logcat
@@ -66,12 +67,9 @@ class CurrencyListFragment : Fragment() {
             viewModel.currencyListStateFlow
                 .flowWithLifecycle(lifecycle)
                 .catch { e ->
-
-                    logcat { "RRR Error ${e.asLog()}" }
+                    logcat { e.asLog() }
                 }
                 .collect {
-                    throw Exception("RRR Error")
-                    logcat { "RRR show $it" }
                     currencyListAdapter.submitList(it)
                 }
         }
@@ -81,6 +79,9 @@ class CurrencyListFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.errorShareFlow
                 .flowWithLifecycle(lifecycle)
+                .catch { e ->
+                    logcat { e.asLog() }
+                }
                 .collect { errorMessage ->
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
                 }

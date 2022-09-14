@@ -3,3 +3,5 @@ include(":app")
 
 include(":common")
 project(":common").projectDir = File(rootDir ,"CommonCore/app")
+
+includeBuild("../pluginVersion")

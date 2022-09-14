@@ -1,21 +1,26 @@
+import com.coors.plugin.version.*
+
 plugins {
     id("com.android.application")
-    commonPlugins.forEach { id(it) }
+    id("kotlin-android")
+    id("kotlin-parcelize")
+    id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     id("com.google.devtools.ksp").version("1.6.10-1.0.4")
     id("de.mannodermaus.android-junit5")
+    id("com.coors.plugin.version")
 }
 
 android {
-    compileSdk = ConfigExtensions.compileSdkVersion
-    buildToolsVersion = ConfigExtensions.buildToolsVersion
+    compileSdk = AndroidConfig.compileSdkVersion
+    buildToolsVersion = AndroidConfig.buildToolsVersion
 
     defaultConfig {
         applicationId = "com.coors.demoproject"
-        minSdk = ConfigExtensions.minSdkVersion
-        targetSdk = ConfigExtensions.targetSdkVersion
-        versionCode = ConfigExtensions.versionCode
-        versionName = ConfigExtensions.versionName
+        minSdk = AndroidConfig.minSdkVersion
+        targetSdk = AndroidConfig.targetSdkVersion
+        versionCode = AndroidConfig.versionCode
+        versionName = AndroidConfig.versionName
 
         // 1) Make sure to use the AndroidJUnitRunner, or a subclass of it. This requires a dependency on androidx.test:runner, too!
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -59,7 +64,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.composeUi
+        kotlinCompilerExtensionVersion = "1.1.1"
     }
 
     tasks.withType<Test>().configureEach {
@@ -67,12 +72,107 @@ android {
     }
 }
 
-importCommonDependencies()
-importHiltDependencies()
-importKotlinCoroutines()
-importTestDependencies()
-importThirdPartyDependencies()
+//importCommonDependencies()
+//importHiltDependencies()
+//importKotlinCoroutines()
+//importTestDependencies()
+//importThirdPartyDependencies()
 
 dependencies {
     implementation(project(":common"))
+    implementation(Libs.hiltAndroid)
+    kapt(Libs.hiltAndroidCompiler)
+
+    implementation(Libs.androidCoreKtx)
+    implementation(Libs.appCompat)
+    implementation(Libs.materialDesign)
+    implementation(Libs.constraintLayout)
+    implementation(Libs.activityKtx)
+    implementation(Libs.fragmentKtx)
+    implementation(Libs.navigationFragmentKtx)
+    implementation(Libs.navigationUiKtx)
+    implementation(Libs.androidLegacy)
+    // lifecycle
+    implementation(Libs.lifecycleKtx)
+    implementation(Libs.lifecycleViewModelKtx)
+    implementation(Libs.lifecycleSaveState)
+    implementation(Libs.lifecycleLiveDataKtx)
+    implementation(Libs.lifecycleProcess)
+    implementation(Libs.lifecycleReactLiveStreamsKtx)
+
+    // compose
+    implementation(Libs.composeUi)
+    implementation(Libs.composeConstraintLayout)
+    // Tooling support (Previews, etc.)
+    implementation(Libs.composeUiTooling)
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation(Libs.composeFoundation)
+    // Integration with activities
+    implementation(Libs.activityCompose)
+    // Animations
+    implementation(Libs.animationCompose)
+    // Integration with ViewModels
+    implementation(Libs.viewModelCompose)
+    // Material Design
+    implementation(Libs.composeMaterialDesign)
+    // Material design icons
+    implementation(Libs.composeMaterialDesignIcon)
+    implementation(Libs.composeMaterialDesignIconExtended)
+    // Integration with observables
+    implementation(Libs.composeUiLiveData)
+//        implementation("androidx.compose.runtime:runtime-rxjava2:${Versions.composeUi}")
+    implementation(Libs.coliCompose)
+    implementation(Libs.hiltNavigationCompose)
+    implementation(Libs.composeConstraintLayout)
+
+    implementation(Libs.kotlinCoroutinesCore)
+    implementation(Libs.kotlinCoroutinesAndroid)
+
+    implementation(Libs.hiltAndroid)
+    kapt(Libs.hiltAndroidCompiler)
+
+    implementation(Libs.squareUpLogcat)
+    implementation(Libs.moshiKotlin)
+    ksp(Libs.moshiCodegen)
+    implementation(Libs.moshiAdapters)
+
+    // Core library
+    androidTestImplementation(Libs.androidTestCore)
+    androidTestImplementation(Libs.androidTestCoreKtx)
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation(Libs.androidRunner)
+    androidTestImplementation(Libs.androidRules)
+
+    // Assertions
+    androidTestImplementation(Libs.androidJunit)
+    androidTestImplementation(Libs.androidJunitKtx)
+    androidTestImplementation(Libs.archCore)
+
+    androidTestImplementation(Libs.kotlinCoroutinesTest)
+
+    testImplementation(Libs.junit)
+    testImplementation(Libs.mockkCore)
+    testImplementation(Libs.mockkJvm)
+    androidTestImplementation(Libs.mockkJvm)
+    androidTestImplementation(Libs.mockkAndroid)
+    androidTestImplementation(Libs.androidJunit)
+    androidTestImplementation(Libs.espresso)
+
+    // compose UI Tests
+    androidTestImplementation(Libs.composeUnitTest)
+
+    // koTest
+    testImplementation(Libs.koTestRunner)
+    testImplementation(Libs.koTestAssertions)
+    testImplementation(Libs.koTestProperty)
+    androidTestImplementation(Libs.koTestRunner)
+    androidTestImplementation(Libs.koTestAssertions)
+    androidTestImplementation(Libs.koTestProperty)
+
+    // junit 5
+    testImplementation(Libs.junit5Jupiter)
+    testRuntimeOnly(Libs.junit5Engine)
+    androidTestImplementation(Libs.androidJunit5Core)
+    androidTestRuntimeOnly(Libs.androidJunit5Runner)
 }

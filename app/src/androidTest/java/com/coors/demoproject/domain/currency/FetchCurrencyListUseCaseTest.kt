@@ -1,10 +1,7 @@
 package com.coors.demoproject.domain.currency
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.coors.commoncore.result.Result
-import com.coors.commoncore.result.data
-import com.coors.commoncore.result.exception
 import com.coors.demoproject.CoroutineScope
 import com.coors.demoproject.MainCoroutineRule
 import com.coors.demoproject.MockData
@@ -13,19 +10,19 @@ import com.coors.demoproject.data.currency.CurrencyInfoMapper
 import com.coors.demoproject.data.currency.CurrencyRepository
 import com.coors.demoproject.data.currency.Mapper
 import com.coors.demoproject.runBlockingTest
-import com.google.common.truth.Truth.assertThat
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.kotest.core.spec.style.AnnotationSpec
+import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
+import io.kotest.matchers.types.shouldBeTypeOf
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
 
 class FetchCurrencyListUseCaseTest : AnnotationSpec() {
 
@@ -72,11 +69,11 @@ class FetchCurrencyListUseCaseTest : AnnotationSpec() {
 
             fetchCurrencyListUseCase(Unit)
                 .onEach { result ->
-                    assertThat(result).isInstanceOf(Result.Success::class.java)
-                    assertThat(result.data?.size ?: 0).isEqualTo(14)
-                    assertThat(result.data?.first()).isNotNull()
-                    assertThat(result.data?.first()?.name).isEqualTo("Bitcoin")
-                    assertThat(result.data?.last()?.name).isEqualTo("USD Coin")
+                    result.shouldBeTypeOf<Result.Success<List<CurrencyInfo>>>()
+                    result.data.size.shouldBe(14)
+                    result.data.first().shouldNotBeNull()
+                    result.data.first().name.shouldBe("Bitcoin")
+                    result.data.last().name.shouldBe("USD Coin")
                 }
                 .launchIn(coroutineRule.CoroutineScope())
         }
@@ -97,8 +94,8 @@ class FetchCurrencyListUseCaseTest : AnnotationSpec() {
 
             fetchCurrencyListUseCase(Unit)
                 .onEach { result ->
-                    assertThat(result).isInstanceOf(Result.Error::class.java)
-                    assertThat(result.exception?.message).contains("java.io.EOFException: End of input")
+                    result.shouldBeTypeOf<Result.Error>()
+                    result.exception.message.shouldContain("java.io.EOFException: End of input")
                 }
                 .launchIn(coroutineRule.CoroutineScope())
         }

@@ -13,9 +13,11 @@ import com.coors.demoproject.data.currency.CurrencyInfoMapper
 import com.coors.demoproject.data.currency.CurrencyRepository
 import com.coors.demoproject.data.currency.Mapper
 import com.coors.demoproject.runBlockingTest
-import com.google.common.truth.Truth.assertThat
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeTypeOf
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -72,11 +74,11 @@ class SortCurrencyUseCaseTest {
 
             sortingCurrencyListUseCase(SortingCurrencyListUseCase.Params(isAscending = true))
                 .onEach { result ->
-                    assertThat(result).isInstanceOf(Result.Success::class.java)
-                    assertThat(result.data?.size ?: 0).isEqualTo(14)
-                    assertThat(result.data?.first()).isNotNull()
-                    assertThat(result.data?.first()?.symbol).isEqualTo("BCH")
-                    assertThat(result.data?.last()?.symbol).isEqualTo("XRP")
+                    result.shouldBeTypeOf<Result.Success<List<CurrencyInfo>>>()
+                    result.data.size.shouldBe(14)
+                    result.data.first().shouldNotBeNull()
+                    result.data.first().symbol.shouldBe("BCH")
+                    result.data.last().symbol.shouldBe("XRP")
                 }
                 .launchIn(coroutineRule.CoroutineScope())
         }
@@ -97,11 +99,11 @@ class SortCurrencyUseCaseTest {
 
             sortingCurrencyListUseCase(SortingCurrencyListUseCase.Params(isAscending = false))
                 .onEach { result ->
-                    assertThat(result).isInstanceOf(Result.Success::class.java)
-                    assertThat(result.data?.size ?: 0).isEqualTo(14)
-                    assertThat(result.data?.first()).isNotNull()
-                    assertThat(result.data?.first()?.symbol).isEqualTo("XRP")
-                    assertThat(result.data?.last()?.symbol).isEqualTo("BCH")
+                    result.shouldBeTypeOf<Result.Success<List<CurrencyInfo>>>()
+                    result.data.size.shouldBe(14)
+                    result.data.first().shouldNotBeNull()
+                    result.data.first().symbol.shouldBe("XRP")
+                    result.data.last().symbol.shouldBe("BCH")
                 }
                 .launchIn(coroutineRule.CoroutineScope())
         }
