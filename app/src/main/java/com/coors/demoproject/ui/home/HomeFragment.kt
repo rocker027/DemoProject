@@ -11,10 +11,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -22,12 +23,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import androidx.navigation.NavHost
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.findNavController
 import com.coors.demoproject.R
 import com.coors.demoproject.compose.BasicsTheme
@@ -73,7 +68,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    @OptIn(ExperimentalMaterialApi::class)
     @Composable
     fun GetMenuItems(homeMenu: HomeMenu) {
 //        val navController = rememberNavController()
@@ -88,7 +82,7 @@ class HomeFragment : Fragment() {
 //        }
 
         Card(
-            backgroundColor = MaterialTheme.colors.primary,
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary),
             modifier = Modifier
                 .padding(vertical = 4.dp, horizontal = 8.dp)
                 .clickable { handleNaviTo(homeMenu) },
@@ -135,7 +129,7 @@ class HomeFragment : Fragment() {
                     text = homeMenu.name,
                     modifier = Modifier.weight(1f),
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.h5.copy(
+                    style = MaterialTheme.typography.headlineLarge.copy(
                         fontWeight = FontWeight.Bold
                     )
                 )
@@ -144,7 +138,10 @@ class HomeFragment : Fragment() {
                     modifier = Modifier.width(120.dp),
                     onClick = { expanded = !expanded }
                 ) {
-                    Text(text = if (expanded) "show less" else "show more")
+                    Text(
+                        text = if (expanded) "show less" else "show more",
+                        color = Color.Black
+                    )
                 }
             }
 

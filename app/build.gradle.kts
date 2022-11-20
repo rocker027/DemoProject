@@ -79,6 +79,10 @@ android {
 //importThirdPartyDependencies()
 
 dependencies {
+    val composeBom = platform("androidx.compose:compose-bom:2022.10.00")
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
     implementation(project(":common"))
     implementation(Libs.hiltAndroid)
     kapt(Libs.hiltAndroidCompiler)
@@ -102,28 +106,18 @@ dependencies {
 
     // compose
     implementation(Libs.composeUi)
-    implementation(Libs.composeConstraintLayout)
-    // Tooling support (Previews, etc.)
-    implementation(Libs.composeUiTooling)
+    debugImplementation(Libs.composeManifest)
+    implementation(Libs.composeMaterial3)
+    implementation(Libs.composePreview)
+    debugImplementation(Libs.composeTooling)
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation(Libs.composeFoundation)
     // Integration with activities
-    implementation(Libs.activityCompose)
-    // Animations
-    implementation(Libs.animationCompose)
+    implementation(Libs.composeActivity)
     // Integration with ViewModels
-    implementation(Libs.viewModelCompose)
-    // Material Design
-    implementation(Libs.composeMaterialDesign)
-    // Material design icons
-    implementation(Libs.composeMaterialDesignIcon)
-    implementation(Libs.composeMaterialDesignIconExtended)
-    // Integration with observables
-    implementation(Libs.composeUiLiveData)
-//        implementation("androidx.compose.runtime:runtime-rxjava2:${Versions.composeUi}")
+    implementation(Libs.composeViewModel)
     implementation(Libs.coliCompose)
     implementation(Libs.hiltNavigationCompose)
-    implementation(Libs.composeConstraintLayout)
 
     implementation(Libs.kotlinCoroutinesCore)
     implementation(Libs.kotlinCoroutinesAndroid)
@@ -160,7 +154,7 @@ dependencies {
     androidTestImplementation(Libs.espresso)
 
     // compose UI Tests
-    androidTestImplementation(Libs.composeUnitTest)
+    androidTestImplementation(Libs.composeJunit4)
 
     // koTest
     testImplementation(Libs.koTestRunner)

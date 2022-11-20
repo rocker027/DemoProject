@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.coors.demoproject.compose.BasicsTheme
@@ -28,6 +29,7 @@ class TestComposeFragment : Fragment() {
         }
     }
 
+    @Preview
     @Composable
     private fun LoadTestComposeScreen(
         viewModel: TestComposeViewModel = viewModel()

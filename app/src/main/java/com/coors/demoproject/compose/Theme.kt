@@ -1,33 +1,24 @@
 package com.coors.demoproject.compose
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.MaterialTheme.shapes
-import androidx.compose.material.MaterialTheme.typography
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Blue
-import androidx.compose.ui.res.colorResource
-import com.coors.demoproject.R
 
 
-val DarkColorPalette = darkColors(
+val DarkColorPalette = darkColorScheme(
     primary = Teal200,
-    primaryVariant = Teal700,
     onPrimary = Color.Black,
     secondary = Purple500,
-    secondaryVariant = Purple700,
     onSecondary = Color.White
 )
 
-val LightColorPalette = lightColors(
+val LightColorPalette = lightColorScheme(
     primary = Purple500,
-    primaryVariant = Purple700,
     onPrimary = Color.White,
     secondary = Teal200,
-    secondaryVariant = Teal700,
     onSecondary = Color.Black
 )
 
@@ -43,7 +34,7 @@ fun BasicsTheme(
     }
 
     MaterialTheme(
-        colors = colors,
+        colorScheme = colors,
         typography = typography,
         shapes = shapes,
         content = content
