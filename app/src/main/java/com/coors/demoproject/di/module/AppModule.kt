@@ -1,6 +1,10 @@
 package com.coors.demoproject.di.module
 
+import com.coors.commoncore.data.mapper.Mapper
+import com.coors.commoncore.network.api.DemoApiService
 import com.coors.demoproject.data.currency.*
+import com.coors.demoproject.data.demo.DemoRepository
+import com.coors.demoproject.data.demo.DemoRepositoryImpl
 import com.coors.demoproject.data.home.HomeRepository
 import com.coors.demoproject.data.home.HomeRepositoryImpl
 import com.coors.demoproject.di.qualifier.CurrencyMapperQualifier
@@ -29,6 +33,13 @@ class AppModule {
     @Provides
     @Singleton
     fun provideHomeRepository(): HomeRepository = HomeRepositoryImpl()
+
+    @Provides
+    @Singleton
+    fun provideDemoRepository(
+        demoApiService: DemoApiService
+    ): DemoRepository =
+        DemoRepositoryImpl(demoApiService)
 
     @Provides
     @CurrencyMapperQualifier

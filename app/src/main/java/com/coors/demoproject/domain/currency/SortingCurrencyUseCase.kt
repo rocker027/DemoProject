@@ -1,5 +1,6 @@
 package com.coors.demoproject.domain.currency
 
+import com.coors.commoncore.data.mapper.Mapper
 import com.coors.commoncore.domain.FlowUseCase
 import com.coors.commoncore.result.Result
 import com.coors.demoproject.data.currency.*

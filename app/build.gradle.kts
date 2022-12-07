@@ -169,4 +169,8 @@ dependencies {
     testRuntimeOnly(Libs.junit5Engine)
     androidTestImplementation(Libs.androidJunit5Core)
     androidTestRuntimeOnly(Libs.androidJunit5Runner)
+
+    implementation(Libs.retrofit)
+    implementation(Libs.retrofitMoshi)
+    implementation(Libs.okHttpInterceptor)
 }

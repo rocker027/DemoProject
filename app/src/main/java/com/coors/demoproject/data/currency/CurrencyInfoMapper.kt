@@ -1,5 +1,6 @@
 package com.coors.demoproject.data.currency
 
+import com.coors.commoncore.data.mapper.Mapper
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types

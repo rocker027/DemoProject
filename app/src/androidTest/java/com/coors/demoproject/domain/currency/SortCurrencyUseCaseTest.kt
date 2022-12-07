@@ -4,14 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.coors.commoncore.result.Result
 import com.coors.commoncore.result.data
-import com.coors.commoncore.result.exception
 import com.coors.demoproject.CoroutineScope
 import com.coors.demoproject.MainCoroutineRule
 import com.coors.demoproject.MockData
 import com.coors.demoproject.data.currency.CurrencyInfo
 import com.coors.demoproject.data.currency.CurrencyInfoMapper
 import com.coors.demoproject.data.currency.CurrencyRepository
-import com.coors.demoproject.data.currency.Mapper
 import com.coors.demoproject.runBlockingTest
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

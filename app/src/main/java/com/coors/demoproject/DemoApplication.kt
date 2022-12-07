@@ -8,6 +8,10 @@ import logcat.LogPriority
 
 @HiltAndroidApp
 class DemoApplication : Application(){
+
+//    @Inject
+//    lateinit var networkManager: NetworkManager
+
     override fun onCreate() {
         super.onCreate()
         AndroidLogcatLogger.installOnDebuggableApp(this, minPriority = LogPriority.VERBOSE)

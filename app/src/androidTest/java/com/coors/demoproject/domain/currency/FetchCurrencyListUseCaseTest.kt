@@ -8,7 +8,6 @@ import com.coors.demoproject.MockData
 import com.coors.demoproject.data.currency.CurrencyInfo
 import com.coors.demoproject.data.currency.CurrencyInfoMapper
 import com.coors.demoproject.data.currency.CurrencyRepository
-import com.coors.demoproject.data.currency.Mapper
 import com.coors.demoproject.runBlockingTest
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
