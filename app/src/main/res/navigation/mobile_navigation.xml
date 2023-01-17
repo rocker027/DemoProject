@@ -16,5 +16,12 @@
         <action
             android:id="@+id/action_homeFragment_to_currencyListFragment"
             app:destination="@id/currencyListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_testComposeFragment"
+            app:destination="@id/testComposeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/testComposeFragment"
+        android:name="com.coors.demoproject.ui.testcompose.TestComposeFragment"
+        android:label="TestComposeFragment" />
 </navigation>

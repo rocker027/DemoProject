@@ -95,7 +95,7 @@ class HomeFragment : Fragment() {
         is CroDemoCompose -> R.id.action_homeFragment_to_currencyListFragment
         is CroDemoKotlin -> R.id.action_homeFragment_to_currencyListFragment
         is Home -> R.id.action_homeFragment_to_currencyListFragment
-        is TestCompose -> R.id.action_homeFragment_to_currencyListFragment
+        is TestCompose -> R.id.action_homeFragment_to_testComposeFragment
     }.run {
         navController.navigate(this)
     }

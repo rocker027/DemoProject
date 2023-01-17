@@ -1,6 +1,7 @@
 package com.coors.demoproject.domain.currency
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.coors.commoncore.data.mapper.Mapper
 import com.coors.commoncore.result.Result
 import com.coors.demoproject.CoroutineScope
 import com.coors.demoproject.MainCoroutineRule

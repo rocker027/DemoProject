@@ -37,9 +37,9 @@ class HomeViewModel @Inject constructor(
         }
 
     init {
-        viewModelScope.launch {
-            demoRepository.getUsers()
-        }
+//        viewModelScope.launch {
+//            demoRepository.getUsers()
+//        }
 
     }
 }

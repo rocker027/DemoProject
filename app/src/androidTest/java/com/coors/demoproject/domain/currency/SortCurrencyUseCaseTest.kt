@@ -2,6 +2,7 @@ package com.coors.demoproject.domain.currency
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.coors.commoncore.data.mapper.Mapper
 import com.coors.commoncore.result.Result
 import com.coors.commoncore.result.data
 import com.coors.demoproject.CoroutineScope
