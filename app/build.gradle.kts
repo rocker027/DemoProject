@@ -79,7 +79,7 @@ android {
 //importThirdPartyDependencies()
 
 dependencies {
-    val composeBom = platform("androidx.compose:compose-bom:2022.10.00")
+    val composeBom = platform("androidx.compose:compose-bom:2022.12.00")
     implementation(composeBom)
     androidTestImplementation(composeBom)
 
@@ -106,12 +106,18 @@ dependencies {
 
     // compose
     implementation(Libs.composeUi)
-    debugImplementation(Libs.composeManifest)
     implementation(Libs.composeMaterial3)
-    implementation(Libs.composePreview)
-    debugImplementation(Libs.composeTooling)
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation(Libs.composeFoundation)
+    debugImplementation(Libs.composeManifest)
+    implementation(Libs.composePreview)
+    debugImplementation(Libs.composeTooling)
+    implementation(Libs.composeIconCore)
+    implementation(Libs.composeIconExtended)
+    implementation(Libs.composeWindowSizeClass)
+    implementation(Libs.composeLiveData)
+    implementation(Libs.composeLottie)
+
     // Integration with activities
     implementation(Libs.composeActivity)
     // Integration with ViewModels

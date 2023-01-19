@@ -1,32 +1,30 @@
 package com.coors.demoproject.ui.testcompose
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.coors.demoproject.compose.BasicsTheme
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class TestComposeFragment : Fragment() {
@@ -40,7 +38,6 @@ class TestComposeFragment : Fragment() {
             setContent {
                 BasicsTheme {
                     LoadTestComposeScreen()
-//                    PrivacyTextV2()
                 }
             }
         }
@@ -51,110 +48,95 @@ class TestComposeFragment : Fragment() {
     private fun LoadTestComposeScreen(
         viewModel: TestComposeViewModel = viewModel()
     ) {
-        PrivacyPolicyText()
+//        PrivacyPolicyText()
+//        CardViewTest()
+//        MessageCard("1")
+//        Conversation(listOf("1", "2", "3"))
+//        SearchBarViews(Modifier)
+//        AlignYourBodyElements()
+        MockSameMatchAnchorsView()
     }
-}
 
-@Preview
-@Composable
-private fun PrivacyPolicyText() {
-    val annotatedString = buildAnnotatedString {
-        append("By signing up, you agree to our ")
-        withStyle(style = SpanStyle(
-            color = Color.Blue,
-            fontWeight = FontWeight.Bold,
-            textDecoration = TextDecoration.Underline)) {
-            append("Privacy Policy")
-        }
-        append(" and ")
-        withStyle(style = SpanStyle(
-            color = Color.Blue,
-            fontWeight = FontWeight.Bold,
-            textDecoration = TextDecoration.Underline)) {
-            append("Terms of Service")
-        }
-        append(".")
-    }
-    ClickableText(
-        text = annotatedString,
-        modifier = Modifier
-            .background(Color.White)
-            .padding(16.dp)
-            .fillMaxWidth(),
-        onClick = {
-            annotatedString
-                .getStringAnnotations("URL", it, it)
-                .firstOrNull()?.let { annotation ->
-                    Log.d("TestComposeFragment", "annotation: $annotation")
-                }
-        }
-    )
 }
 
 @Composable
-private fun PrivacyTextV2() {
-    val annotatedText = buildAnnotatedString {
-        append("登录即表明同意")
-        pushStringAnnotation(
-            tag = "tag1",
-            annotation = "隐私条款1：https://www.xxx1.com"
-        )
-        withStyle(
-            style = SpanStyle(
-                color = Color.Blue,
-                fontWeight = FontWeight.Bold,
-                textDecoration = TextDecoration.Underline
-            )
-        ) {
-            append("中国移动认证服务条款")
-        }
-        pop()
-        append("以及")
-        pushStringAnnotation(
-            tag = "tag2",
-            annotation = "隐私条款2：https://www.xxx2.com"
-        )
-        withStyle(
-            style = SpanStyle(
-                color = Color.Blue,
-                fontWeight = FontWeight.Bold,
-                textDecoration = TextDecoration.Underline
-            )
-        ) {
-            append("用户协议")
-        }
-        pop()
-        append("和")
-        pushStringAnnotation(
-            tag = "tag1",
-            annotation = "隐私条款3：https://www.xxx3.com"
-        )
-        withStyle(
-            style = SpanStyle(
-                color = Color.Blue,
-                fontWeight = FontWeight.Bold,
-                textDecoration = TextDecoration.Underline
-            )
-        ) {
-            append("隐私政策")
-        }
-        pop()
-    }
+fun MockSameMatchAnchorsView(){
+    val items = getMockAnchors()
 
-    val tags = listOf("tag1", "tag2", "tag3")
-    ClickableText(
-        text = annotatedText,
-        onClick = { offset ->
-            tags.forEach { tag ->
-                annotatedText.getStringAnnotations(
-                    tag = tag,
-                    start = offset,
-                    end = offset
-                )
-                    .firstOrNull()?.let { annotation ->
-                        Log.d("xige", annotation.item)
-                    }
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .fillMaxHeight()
+        .background(color = Color(0xFF000000))
+    ) {
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(
+            text = "本场主播",
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier.padding(start = 16.dp)
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp ),
+        ) {
+            items(items) {
+                SameMatchAnchorContainerView(it)
             }
         }
-    )
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(
+            text = "更多主播",
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier.padding(start = 16.dp)
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        LazyVerticalGrid(
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp ),
+            modifier = Modifier,
+            columns = GridCells.Fixed(2)
+        ) {
+            items(items) {
+                OtherMoreAnchorContainerView(it)
+            }
+        }
+    }
 }
+
+fun getMockAnchors() = listOf<AnchorModel>(
+    AnchorModel(
+        name = "爱妃宝贝",
+        photo = "https://picsum.photos/id/237/200/300",
+        id = 0,
+        liveStatus = 0,
+        isBooking = false,
+        language = -1,
+        tag = "赛事分析",
+        startData = "08-10 10:00"
+    ),
+    AnchorModel(
+        name = "曼联糖糖",
+        photo = "https://picsum.photos/id/236/200/300",
+        id = 1,
+        liveStatus = 0,
+        isBooking = true,
+        language = 0,
+        tag = "赛事分析",
+        startData = "08-12 10:00"
+    ),
+    AnchorModel(
+        name = "小梨宝",
+        photo = "https://picsum.photos/id/235/200/300",
+        id = 2,
+        liveStatus = 1,
+        isBooking = false,
+        language = 1,
+        tag = "赛事分析",
+        startData = "08-11 10:00"
+    )
+)
