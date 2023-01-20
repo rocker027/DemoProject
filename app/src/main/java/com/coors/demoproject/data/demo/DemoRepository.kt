@@ -1,5 +1,7 @@
 package com.coors.demoproject.data.demo
 
+import com.coors.commoncore.model.AnchorModel
+
 interface DemoRepository {
-    suspend fun getUsers(): List<String>
+    suspend fun getAnchors(): List<AnchorModel>
 }

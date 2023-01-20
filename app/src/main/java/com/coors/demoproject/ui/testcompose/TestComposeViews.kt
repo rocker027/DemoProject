@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.airbnb.lottie.compose.*
+import com.coors.commoncore.model.AnchorModel
 import com.coors.demoproject.R
 
 @Composable
@@ -252,21 +253,6 @@ fun AlignYourBodyElements() {
     }
 }
 
-data class AnchorModel(
-    val name: String = "灯妹妹菲儿",
-    val photo: String = "https://anitar.dev/get/r",
-    val id: Int = 0,
-    val liveStatus: Int = 0,
-    val isBooking: Boolean = false,
-    val language: Int = 0,
-    val tag: String = "官方新手教学",
-    val startData: String = "08-10 10:00",
-    val depiction: String = "私密直播间，及时反馈解决",
-) {
-    fun isLiving() = liveStatus == 1
-}
-
-
 @Composable
 fun SameMatchAnchorContainerView(
     anchor: AnchorModel,
@@ -287,8 +273,7 @@ fun OtherMoreAnchorContainerView(anchor: AnchorModel){
             LivingStateView(modifier = Modifier.align(Alignment.TopEnd))
         } else {
             ReadyStateView(
-                isBooking = anchor.isBooking,
-                startData = anchor.startData,
+                anchor = anchor,
                 modifier = Modifier.align(Alignment.TopEnd)
             )
         }
@@ -330,45 +315,44 @@ fun LivingStateView(modifier: Modifier) {
 }
 
 @Composable
-fun ReadyStateView(isBooking: Boolean, startData: String, modifier: Modifier) {
+fun ReadyStateView(anchor: AnchorModel, modifier: Modifier) {
     Row(
-        modifier = modifier.size(113.dp, 16.dp)
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .background(
+                color = Color(0xB2000000),
+                shape = RoundedCornerShape(bottomStart = 8.dp, topEnd = 8.dp)
+            )
     ) {
         Text(
-            text = startData,
+            text = anchor.startDate.toString(),
             fontSize = 10.sp,
             color = Color(0xFFBBBBBB),
             modifier = Modifier
-                .background(
-                    color = Color(0xB2000000),
-                    shape = RoundedCornerShape(bottomStart = 8.dp)
-                )
-                .size(69.dp, 16.dp)
-                .padding(start = 6.dp, end = 2.dp)
-                .align(Alignment.CenterVertically)
-
+                .wrapContentWidth()
+                .padding(start = 8.dp, end = 4.dp)
         )
         Row(
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .background(
                     color = Color(0xFF2B44B1),
-                    shape = RoundedCornerShape(topEnd = 8.dp)
+                    shape = RoundedCornerShape(topEnd = 8.dp, bottomStart = 4.dp)
                 )
-                .size(44.dp, 16.dp)
+                .padding(end = 8.dp)
         ) {
             Spacer(modifier = Modifier.width(3.dp))
-            if (!isBooking) {
+            if (!anchor.isBooking()) {
                 Image(
                     painter = painterResource(id = R.drawable.icon_ball), contentDescription = null,
                     modifier = Modifier
                         .size(12.dp)
-                        .align(Alignment.CenterVertically)
                 )
             }
             Text(
-                text = if (isBooking) "已预约" else "预约",
+                text = if (anchor.isBooking()) "已预约" else "预约",
                 fontSize = 10.sp,
-                modifier = Modifier.padding(end = 4.dp),
+                modifier = Modifier,
                 textAlign = TextAlign.Center,
                 color = Color(0xFFFFFFFF)
             )
@@ -400,31 +384,31 @@ fun AnchorTagView(tag: String , modifier: Modifier) {
 fun SameMatchAnchorView(modifier: Modifier, anchor: AnchorModel) {
     Column(
         modifier = modifier
-            .size(96.dp, 106.dp)
+            .size(96.dp, 99.dp)
             .background(color = Color.White, shape = RoundedCornerShape(8.dp))
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data(anchor.photo)
+                .data(anchor.getPhotoUrl())
                 .crossfade(true)
                 .build(),
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
-                .size(96.dp, 63.dp)
+                .size(96.dp, 56.dp)
                 .clip(RoundedCornerShape(8.dp))
 
         )
 
         Spacer(modifier = Modifier.height(2.dp))
         Row {
-            if (anchor.language != -1) {
+            if (anchor.language != "-1") {
                 Text(
-                    text = if (anchor.language == 0) "普" else "粵語",
+                    text = if (anchor.language == "0") "普" else "粵語",
                     fontSize = 12.sp,
                     color = Color(0xFF00A525),
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(start = 4.dp, end = 4.dp)
+                    modifier = Modifier.padding(start = 4.dp)
                 )
             }
             Text(
@@ -437,7 +421,7 @@ fun SameMatchAnchorView(modifier: Modifier, anchor: AnchorModel) {
         }
         Row {
             Spacer(modifier = Modifier.width(4.dp))
-            AnchorTagView(tag = anchor.tag, modifier = Modifier.padding(end = 4.dp))
+            AnchorTagView(tag = anchor.liveHostTypeShow, modifier = Modifier.padding(end = 4.dp))
         }
     }
 }
@@ -447,25 +431,25 @@ fun OtherMoreAnchorView(modifier: Modifier, anchor: AnchorModel) {
     val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.anchor_stroke))
     Column(
         modifier = modifier
-            .size(165.dp, 157.dp)
+            .size(165.dp, 144.dp)
             .background(color = Color.White, shape = RoundedCornerShape(8.dp))
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data(anchor.photo)
+                .data(anchor.getPhotoUrl())
                 .crossfade(true)
                 .build(),
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
-                .size(165.dp, 108.dp)
+                .size(165.dp, 99.dp)
                 .clip(RoundedCornerShape(8.dp))
 
         )
 
         Spacer(modifier = Modifier.height(2.dp))
         Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .padding(start = 4.dp, end = 4.dp)
                 .fillMaxWidth()
@@ -476,12 +460,12 @@ fun OtherMoreAnchorView(modifier: Modifier, anchor: AnchorModel) {
                     restartOnPlay = true,
                     iterations = LottieConstants.IterateForever,
                     modifier = Modifier
-                        .size(27.dp)
+                        .size(25.dp)
                         .align(Alignment.Center)
                 )
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
-                        .data(anchor.photo)
+                        .data(anchor.getPhotoUrl())
                         .crossfade(true)
                         .build(),
                     contentDescription = null,
@@ -502,10 +486,12 @@ fun OtherMoreAnchorView(modifier: Modifier, anchor: AnchorModel) {
                     .align(Alignment.CenterVertically)
             )
 
-            AnchorTagView(tag = anchor.tag, modifier = Modifier.align(Alignment.CenterVertically))
+            AnchorTagView(tag = anchor.liveHostTypeShow, modifier = Modifier
+                .size(70.dp, 18.dp)
+                .padding(end = 4.dp))
         }
         Text(
-            text = anchor.depiction,
+            text = anchor.liveHostTypeShow,
             fontSize = 12.sp,
             color = Color(0xFF000000),
             modifier = Modifier.padding(start = 4.dp, end = 4.dp)
@@ -517,13 +503,58 @@ fun OtherMoreAnchorView(modifier: Modifier, anchor: AnchorModel) {
 @Preview
 @Composable
 fun ShowNotBookingReadyStateView() {
-    ReadyStateView(isBooking = false, startData = "08-10 10:00", modifier = Modifier)
+    ReadyStateView(anchor = AnchorModel(
+        id = 0,
+        name = "",
+        photoId = "",
+        liveRoomId = 0,
+        liveStatus = 0,
+        videoSource = null,
+        language = "",
+        activityStatus = 0,
+        priority = 0,
+        league = "",
+        masterTeamName = "",
+        matchId = "",
+        subscribeStatus = 0,
+        startDate = 0,
+        backgroundImage = "",
+        benefitsAssistantSwitch = 0,
+        liveHostType = 0,
+        liveHostTypeShow = "",
+        matchType = "",
+        liveUserGroupId = 0
+    ), modifier = Modifier)
 }
 
 @Preview
 @Composable
 fun ShowBookingReadyStateView() {
-    ReadyStateView(isBooking = true, startData = "08-10 10:00", modifier = Modifier)
+    ReadyStateView(
+        anchor = AnchorModel(
+            id = 0,
+            name = "",
+            photoId = "",
+            liveRoomId = 0,
+            liveStatus = 0,
+            videoSource = null,
+            language = "",
+            activityStatus = 0,
+            priority = 0,
+            league = "",
+            masterTeamName = "",
+            matchId = "",
+            subscribeStatus = 0,
+            startDate = 0,
+            backgroundImage = "",
+            benefitsAssistantSwitch = 0,
+            liveHostType = 0,
+            liveHostTypeShow = "",
+            matchType = "",
+            liveUserGroupId = 0
+        ),
+        modifier = Modifier
+    )
 }
 
 @Preview
@@ -536,4 +567,43 @@ fun ShowLiving() {
 @Composable
 fun ShowTag() {
     AnchorTagView("官方新手教学", modifier = Modifier)
+}
+
+@Preview
+@Composable
+fun ShowText() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp)
+    ) {
+        Text(
+            text = "主播",
+            fontSize = 16.sp,
+            color = Color(0xFF000000),
+            modifier = Modifier.wrapContentWidth()
+        )
+
+        Text(
+            text = "tex视频小窗口默认位置更改到右上tex视频小窗口默认位置更改到右上tex视频小窗口默认位置更改到右上",
+            fontSize = 12.sp,
+            color = Color(0xFF999999),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .wrapContentWidth(Alignment.Start)
+                .weight(1f)
+        )
+
+        Text(
+            text = "尾巴",
+            fontSize = 12.sp,
+            color = Color(0xFF999999),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.wrapContentWidth()
+        )
+    }
 }

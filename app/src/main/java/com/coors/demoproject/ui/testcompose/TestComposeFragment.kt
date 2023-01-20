@@ -13,6 +13,8 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
@@ -22,12 +24,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.coors.commoncore.model.AnchorModel
 import com.coors.demoproject.compose.BasicsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class TestComposeFragment : Fragment() {
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,20 +53,16 @@ class TestComposeFragment : Fragment() {
     private fun LoadTestComposeScreen(
         viewModel: TestComposeViewModel = viewModel()
     ) {
-//        PrivacyPolicyText()
-//        CardViewTest()
-//        MessageCard("1")
-//        Conversation(listOf("1", "2", "3"))
-//        SearchBarViews(Modifier)
-//        AlignYourBodyElements()
-        MockSameMatchAnchorsView()
+        val anchors: List<AnchorModel> by viewModel.getAnchors().collectAsState(initial = emptyList())
+
+        MockSameMatchAnchorsView(anchors)
     }
 
 }
 
 @Composable
-fun MockSameMatchAnchorsView(){
-    val items = getMockAnchors()
+fun MockSameMatchAnchorsView(items: List<AnchorModel>) {
+//    val items = getMockAnchors()
 
     Column(modifier = Modifier
         .fillMaxWidth()
@@ -108,35 +109,35 @@ fun MockSameMatchAnchorsView(){
     }
 }
 
-fun getMockAnchors() = listOf<AnchorModel>(
-    AnchorModel(
-        name = "爱妃宝贝",
-        photo = "https://picsum.photos/id/237/200/300",
-        id = 0,
-        liveStatus = 0,
-        isBooking = false,
-        language = -1,
-        tag = "赛事分析",
-        startData = "08-10 10:00"
-    ),
-    AnchorModel(
-        name = "曼联糖糖",
-        photo = "https://picsum.photos/id/236/200/300",
-        id = 1,
-        liveStatus = 0,
-        isBooking = true,
-        language = 0,
-        tag = "赛事分析",
-        startData = "08-12 10:00"
-    ),
-    AnchorModel(
-        name = "小梨宝",
-        photo = "https://picsum.photos/id/235/200/300",
-        id = 2,
-        liveStatus = 1,
-        isBooking = false,
-        language = 1,
-        tag = "赛事分析",
-        startData = "08-11 10:00"
-    )
-)
+//fun getMockAnchors() = listOf<AnchorModel>(
+//    AnchorModel(
+//        name = "爱妃宝贝",
+//        photo = "https://picsum.photos/id/237/200/300",
+//        id = 0,
+//        liveStatus = 0,
+//        isBooking = false,
+//        language = -1,
+//        tag = "赛事分析",
+//        startData = "08-10 10:00"
+//    ),
+//    AnchorModel(
+//        name = "曼联糖糖",
+//        photo = "https://picsum.photos/id/236/200/300",
+//        id = 1,
+//        liveStatus = 0,
+//        isBooking = true,
+//        language = 0,
+//        tag = "赛事分析",
+//        startData = "08-12 10:00"
+//    ),
+//    AnchorModel(
+//        name = "小梨宝",
+//        photo = "https://picsum.photos/id/235/200/300",
+//        id = 2,
+//        liveStatus = 1,
+//        isBooking = false,
+//        language = 1,
+//        tag = "赛事分析",
+//        startData = "08-11 10:00"
+//    )
+//)
