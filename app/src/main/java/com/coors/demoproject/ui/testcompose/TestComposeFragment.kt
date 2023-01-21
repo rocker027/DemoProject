@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.coors.commoncore.model.AnchorModel
 import com.coors.demoproject.compose.BasicsTheme
@@ -53,8 +54,7 @@ class TestComposeFragment : Fragment() {
     private fun LoadTestComposeScreen(
         viewModel: TestComposeViewModel = viewModel()
     ) {
-        val anchors: List<AnchorModel> by viewModel.getAnchors().collectAsState(initial = emptyList())
-
+        val anchors: List<AnchorModel> by viewModel.anchorsStateFlow.collectAsState(initial = emptyList())
         MockSameMatchAnchorsView(anchors)
     }
 

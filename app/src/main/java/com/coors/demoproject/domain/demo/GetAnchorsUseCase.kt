@@ -4,6 +4,7 @@ import com.coors.commoncore.domain.FlowUseCase
 import com.coors.commoncore.model.AnchorModel
 import com.coors.commoncore.model.AnchorWrapper
 import com.coors.commoncore.result.Result
+import com.coors.commoncore.result.map
 import com.coors.demoproject.data.demo.DemoRepository
 import com.coors.demoproject.data.home.HomeMenu
 import com.coors.demoproject.data.home.HomeRepository
@@ -24,7 +25,13 @@ class GetAnchorsUseCase @Inject constructor(
 ) : FlowUseCase<Unit, List<AnchorModel>>(coroutineDispatcher) {
 
     override fun execute(parameters: Unit): Flow<Result<List<AnchorModel>>> = flow {
-        emit(Result.Success(getMockAnchors()?.data ?: emptyList()))
+//        emit(Result.Success(getMockAnchors()?.data ?: emptyList()))
+        val result = repository.getAnchors()
+        if (result is Result.Success) {
+            emit(Result.Success(result.data.data))
+        } else {
+            emit(Result.Error(Exception("get anchors failed")))
+        }
     }
 
     private fun getMockAnchors(): AnchorWrapper? {

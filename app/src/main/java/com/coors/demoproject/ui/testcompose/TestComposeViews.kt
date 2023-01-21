@@ -402,9 +402,9 @@ fun SameMatchAnchorView(modifier: Modifier, anchor: AnchorModel) {
 
         Spacer(modifier = Modifier.height(2.dp))
         Row {
-            if (anchor.language != "-1") {
+            if (anchor.hostLanguage != -1) {
                 Text(
-                    text = if (anchor.language == "0") "普" else "粵語",
+                    text = if (anchor.hostLanguage == 0) "普" else "粵語",
                     fontSize = 12.sp,
                     color = Color(0xFF00A525),
                     overflow = TextOverflow.Ellipsis,
@@ -412,7 +412,7 @@ fun SameMatchAnchorView(modifier: Modifier, anchor: AnchorModel) {
                 )
             }
             Text(
-                text = anchor.name,
+                text = anchor.homeName.orEmpty(),
                 fontSize = 12.sp,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -421,7 +421,7 @@ fun SameMatchAnchorView(modifier: Modifier, anchor: AnchorModel) {
         }
         Row {
             Spacer(modifier = Modifier.width(4.dp))
-            AnchorTagView(tag = anchor.liveHostTypeShow, modifier = Modifier.padding(end = 4.dp))
+            AnchorTagView(tag = anchor.liveHostTypeShow.orEmpty(), modifier = Modifier.padding(end = 4.dp))
         }
     }
 }
@@ -477,7 +477,7 @@ fun OtherMoreAnchorView(modifier: Modifier, anchor: AnchorModel) {
                 )
             }
             Text(
-                text = anchor.name,
+                text = anchor.hostName.orEmpty(),
                 fontSize = 12.sp,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -486,12 +486,12 @@ fun OtherMoreAnchorView(modifier: Modifier, anchor: AnchorModel) {
                     .align(Alignment.CenterVertically)
             )
 
-            AnchorTagView(tag = anchor.liveHostTypeShow, modifier = Modifier
+            AnchorTagView(tag = anchor.liveHostTypeShow.orEmpty(), modifier = Modifier
                 .size(70.dp, 18.dp)
                 .padding(end = 4.dp))
         }
         Text(
-            text = anchor.liveHostTypeShow,
+            text = anchor.liveHostTypeShow.orEmpty(),
             fontSize = 12.sp,
             color = Color(0xFF000000),
             modifier = Modifier.padding(start = 4.dp, end = 4.dp)
@@ -504,26 +504,45 @@ fun OtherMoreAnchorView(modifier: Modifier, anchor: AnchorModel) {
 @Composable
 fun ShowNotBookingReadyStateView() {
     ReadyStateView(anchor = AnchorModel(
-        id = 0,
-        name = "",
-        photoId = "",
-        liveRoomId = 0,
-        liveStatus = 0,
-        videoSource = null,
-        language = "",
-        activityStatus = 0,
-        priority = 0,
-        league = "",
-        masterTeamName = "",
+        awayLogo = null,
+        awayName = null,
+        awayScore = null,
+        gameTime = null,
+        guestTeamName = null,
+        half = null,
+        homeLogo = null,
+        homeName = null,
+        homeScore = null,
+        hostId = null,
+        hostName = null,
+        hostPhotoId = null,
+        league = null,
+        liveRoomId = null,
+        liveStatusValue = null,
+        liveStreamId = null,
+        masterTeamName = null,
         matchId = "",
-        subscribeStatus = 0,
-        startDate = 0,
-        backgroundImage = "",
-        benefitsAssistantSwitch = 0,
-        liveHostType = 0,
-        liveHostTypeShow = "",
-        matchType = "",
-        liveUserGroupId = 0
+        matchType = null,
+        multiLanguageMasterTeamName = null,
+        multiLanguageMatchLeague = null,
+        startDate = null,
+        videoSource = null,
+        voidSourceUrl = null,
+        hostTags = null,
+        subscribeStatus = null,
+        popularity = null,
+        backgroundImage = null,
+        hostLanguage = null,
+        hostPictureId = null,
+        sort = null,
+        watcherCount = null,
+        activityStatus = null,
+        benefitsAssistantSwitch = null,
+        gamePart = null,
+        redEnvelopeTotalAmount = null,
+        liveUserGroupId = null,
+        liveHostType = null,
+        liveHostTypeShow = null
     ), modifier = Modifier)
 }
 
@@ -532,26 +551,45 @@ fun ShowNotBookingReadyStateView() {
 fun ShowBookingReadyStateView() {
     ReadyStateView(
         anchor = AnchorModel(
-            id = 0,
-            name = "",
-            photoId = "",
-            liveRoomId = 0,
-            liveStatus = 0,
-            videoSource = null,
-            language = "",
-            activityStatus = 0,
-            priority = 0,
-            league = "",
-            masterTeamName = "",
+            awayLogo = null,
+            awayName = null,
+            awayScore = null,
+            gameTime = null,
+            guestTeamName = null,
+            half = null,
+            homeLogo = null,
+            homeName = null,
+            homeScore = null,
+            hostId = null,
+            hostName = null,
+            hostPhotoId = null,
+            league = null,
+            liveRoomId = null,
+            liveStatusValue = null,
+            liveStreamId = null,
+            masterTeamName = null,
             matchId = "",
-            subscribeStatus = 0,
-            startDate = 0,
-            backgroundImage = "",
-            benefitsAssistantSwitch = 0,
-            liveHostType = 0,
-            liveHostTypeShow = "",
-            matchType = "",
-            liveUserGroupId = 0
+            matchType = null,
+            multiLanguageMasterTeamName = null,
+            multiLanguageMatchLeague = null,
+            startDate = null,
+            videoSource = null,
+            voidSourceUrl = null,
+            hostTags = null,
+            subscribeStatus = null,
+            popularity = null,
+            backgroundImage = null,
+            hostLanguage = null,
+            hostPictureId = null,
+            sort = null,
+            watcherCount = null,
+            activityStatus = null,
+            benefitsAssistantSwitch = null,
+            gamePart = null,
+            redEnvelopeTotalAmount = null,
+            liveUserGroupId = null,
+            liveHostType = null,
+            liveHostTypeShow = null
         ),
         modifier = Modifier
     )
