@@ -257,7 +257,7 @@ fun AlignYourBodyElements() {
 fun SameMatchAnchorContainerView(
     anchor: AnchorModel,
 ) {
-    Box(modifier = Modifier.size(96.dp, 106.dp)) {
+    Box(modifier = Modifier.size(96.dp, 99.dp)) {
         SameMatchAnchorView(anchor = anchor, modifier = Modifier.align(Alignment.Center))
         if (anchor.isLiving()) {
             LivingStateView(modifier = Modifier.align(Alignment.TopEnd))
@@ -267,7 +267,7 @@ fun SameMatchAnchorContainerView(
 
 @Composable
 fun OtherMoreAnchorContainerView(anchor: AnchorModel){
-    Box(modifier = Modifier.size(165.dp, 157.dp)) {
+    Box(modifier = Modifier.size(165.dp, 144.dp)) {
         OtherMoreAnchorView(modifier = Modifier.align(Alignment.Center), anchor = anchor)
         if (anchor.isLiving()) {
             LivingStateView(modifier = Modifier.align(Alignment.TopEnd))
@@ -325,7 +325,7 @@ fun ReadyStateView(anchor: AnchorModel, modifier: Modifier) {
             )
     ) {
         Text(
-            text = anchor.startDate.toString(),
+            text = anchor.getDisplayTime(),
             fontSize = 10.sp,
             color = Color(0xFFBBBBBB),
             modifier = Modifier
@@ -421,7 +421,7 @@ fun SameMatchAnchorView(modifier: Modifier, anchor: AnchorModel) {
         }
         Row {
             Spacer(modifier = Modifier.width(4.dp))
-            AnchorTagView(tag = anchor.liveHostTypeShow.orEmpty(), modifier = Modifier.padding(end = 4.dp))
+            AnchorTagView(tag = anchor.liveHostTypeShow.orEmpty(), modifier = Modifier)
         }
     }
 }
@@ -444,17 +444,15 @@ fun OtherMoreAnchorView(modifier: Modifier, anchor: AnchorModel) {
             modifier = Modifier
                 .size(165.dp, 99.dp)
                 .clip(RoundedCornerShape(8.dp))
-
         )
 
-        Spacer(modifier = Modifier.height(2.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .padding(start = 4.dp, end = 4.dp)
                 .fillMaxWidth()
         ) {
-            Box(modifier = Modifier.size(27.dp)) {
+            Box(modifier = Modifier.size(25.dp)) {
                 LottieAnimation(
                     composition = composition,
                     restartOnPlay = true,
@@ -483,15 +481,16 @@ fun OtherMoreAnchorView(modifier: Modifier, anchor: AnchorModel) {
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
                     .padding(end = 4.dp)
-                    .align(Alignment.CenterVertically)
+                    .weight(1f)
             )
 
             AnchorTagView(tag = anchor.liveHostTypeShow.orEmpty(), modifier = Modifier
                 .size(70.dp, 18.dp)
-                .padding(end = 4.dp))
+                .wrapContentWidth(Alignment.End)
+            )
         }
         Text(
-            text = anchor.liveHostTypeShow.orEmpty(),
+            text = anchor.getVsTeamText(),
             fontSize = 12.sp,
             color = Color(0xFF000000),
             modifier = Modifier.padding(start = 4.dp, end = 4.dp)
